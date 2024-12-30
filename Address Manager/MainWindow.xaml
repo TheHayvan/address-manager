@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:Address_Manager"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+ 
+        <StackPanel VerticalAlignment="Top" DockPanel.Dock="Top"  Orientation="Horizontal" Height="30" >
+            <Label Content="Import CSV" HorizontalAlignment="Center"></Label>
+            <TextBox IsEnabled="False" Width="250" Height="20" Margin="0 0 20 0"></TextBox>
+            <Button Content="Browse" Width="100" Height="20" Margin="0 0 20 0"></Button>
+            <Button Content="Change Mapping" Width="100" Height="20"></Button>
+
+        </StackPanel>
+        <DataGrid DockPanel.Dock="Left"></DataGrid>
+      
+    </DockPanel>
 </Window>
