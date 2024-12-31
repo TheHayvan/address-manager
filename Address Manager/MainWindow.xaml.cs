@@ -161,7 +161,6 @@ namespace Address_Manager
                         address.LocationID = address.Locations.LocationID;
                     }
 
-                    // Clear the Locations object to avoid redundancy
                     address.Locations = null;
                 }
 
