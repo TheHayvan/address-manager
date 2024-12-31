@@ -1,0 +1,70 @@
+﻿<Window x:Class="Address_Manager.Window.ValidateColumns"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Address_Manager.Window"
+        mc:Ignorable="d"
+        Title="Map Columns" Height="447" Width="1081">
+    <DockPanel Margin="10">
+        <!-- Top GroupBox -->
+        <GroupBox Header="Define Mappings" Margin="10" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <!-- Buttons for Add Mapping and Ignore -->
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <Button x:Name="AddMappingButton" Content="Add Mapping" Width="120" Height="30" Margin="0,10,0,10" IsEnabled="False" Click="AddMappingButton_Click"/>
+                    <Button x:Name="IgnoreButton" Content="Ignore" Width="120" Height="30" Margin="0,10,0,10" Click="IgnoreButton_Click"/>
+                </StackPanel>
+
+                <!-- CSV Columns and Database Columns Datagrids -->
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <DataGrid x:Name="CsvColumnsGrid" IsReadOnly="True"  SelectionChanged="CsvColumnsGrid_SelectionChanged"  AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" Margin="10" Width="400">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="CSV Column" Binding="{Binding}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DataGrid x:Name="DatabaseColumnsGrid" IsReadOnly="True" SelectionChanged="DatabaseColumnsGrid_SelectionChanged" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" Margin="10" Width="400"  >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Database Column" Binding="{Binding}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Save Button -->
+        <StackPanel DockPanel.Dock="Bottom">
+            <Button x:Name="SaveButton" Content="Save" Width="120" Height="30" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsEnabled="False" Click="SaveButton_Click" />
+        </StackPanel>
+
+        <!-- Bottom GroupBox -->
+        <GroupBox Header="Mapped and Ignored Columns" Margin="10" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <!-- Buttons for Remove Mapping -->
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <Button x:Name="RemoveMappingButton" Content="Remove Mapping" Width="120" Height="30" Margin="0,10,0,10" IsEnabled="False" Click="RemoveMappingButton_Click"/>
+                </StackPanel>
+
+                <!-- Mapped and Ignored Columns Datagrids -->
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <DataGrid x:Name="MappedColumnsGrid" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" Margin="10" Width="400" SelectionChanged="MappedColumnsGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="CSV Column" Binding="{Binding CsvColumn}" Width="*"/>
+                            <DataGridTextColumn Header="Database Column" Binding="{Binding DatabaseColumn}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DataGrid x:Name="IgnoredColumnsGrid" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" Margin="10" Width="400" SelectionChanged="IgnoredColumnsGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="CSV Column" Binding="{Binding CsvColumn}" Width="*"/>
+                            <DataGridTextColumn Header="Database Column" Binding="{Binding DatabaseColumn}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+
+    </DockPanel>
+</Window>
