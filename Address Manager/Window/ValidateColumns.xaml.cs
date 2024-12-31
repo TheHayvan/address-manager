@@ -251,7 +251,7 @@ namespace Address_Manager.Window
             this.Close();
         }
 
-        private object ConvertValue(string value, Type targetType)
+        public object ConvertValue(string value, Type targetType)
         {
             if (string.IsNullOrWhiteSpace(value))
             {
