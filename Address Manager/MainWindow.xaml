@@ -19,7 +19,7 @@
         <!-- Lower GroupBox with Buttons -->
         <GroupBox Header="Save Options" DockPanel.Dock="Bottom" Margin="10">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                <Button x:Name="ButtonSaveToDb" Content="Save to DB" Width="120" Height="30" Margin="0,0,10,0" Click="ButtonSaveToDb_Click"/>
+                <Button x:Name="ButtonSaveToDb" Content="Save to DB" Width="120" Height="30" Margin="0,0,10,0" Click="ButtonSaveToDb_Click" IsEnabled="False"/>
             </StackPanel>
         </GroupBox>
 

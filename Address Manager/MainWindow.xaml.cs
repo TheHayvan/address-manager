@@ -54,7 +54,7 @@ namespace Address_Manager
                 {
                     // Proceed with further processing if validation is successful
                     PopulateDataGrid(validateWindow.MappedDatabaseObjects);
-                    ButtonSaveToDb.Visibility = Visibility.Visible;
+                    ButtonSaveToDb.IsEnabled = true;
                 }
             }
         }
@@ -83,31 +83,96 @@ namespace Address_Manager
         private void ButtonSaveToDb_Click(object sender, RoutedEventArgs e)
         {
             // Check and highlight invalid rows
-            foreach (var item in DataGridRecords.Items)
+        /*    foreach (var item in DataGridRecords.Items)
             {
                 if (item is Addresses address && string.IsNullOrWhiteSpace(address.Hausnummer))
                 {
                     MessageBox.Show("Please fix the invalid values before saving to the database.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
-            }
+            }*/
+
+            // Ensure distinct locations
+            EnsureDistinctLocations(DataGridRecords.Items.Cast<Addresses>().ToList());
 
             // Perform save to the database
             SaveToDatabase(DataGridRecords.Items.Cast<Addresses>().ToList());
             MessageBox.Show("Data successfully saved to the database.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void SaveToDatabase(List<Addresses> addresses)
+        private void EnsureDistinctLocations(List<Addresses> addresses)
         {
-            // Logic to save data to the database
             foreach (var address in addresses)
             {
-                AddressmanagerEntities.Addresses.Add(address);
+                if (address.Locations != null)
+                {
+                    var postleitzahl = address.Locations.Postleitzahl;
+                    var ortschaft = address.Locations.Ortschaft;
+
+                    // Check if the location already exists in the database
+                    var existingLocation = AddressmanagerEntities.Locations
+                        .FirstOrDefault(l => l.Postleitzahl == postleitzahl && l.Ortschaft == ortschaft);
+
+                    if (existingLocation != null)
+                    {
+                        // Use the existing location
+                        address.Locations = existingLocation;
+                    }
+                    else
+                    {
+                        // Ensure that the new location is not added multiple times
+                        var newLocation = AddressmanagerEntities.Locations.Local
+                            .FirstOrDefault(l => l.Postleitzahl == postleitzahl && l.Ortschaft == ortschaft);
+
+                        if (newLocation == null)
+                        {
+                            // Add the new location to the context
+                            AddressmanagerEntities.Locations.Add(address.Locations);
+                        }
+                    }
+                }
             }
             AddressmanagerEntities.SaveChanges();
         }
 
-      
+        private void SaveToDatabase(List<Addresses> addresses)
+        {
+            foreach (var address in addresses)
+            {
+                if (address.Locations != null)
+                {
+                    // Check if the location already exists in the database
+                    var existingLocation = AddressmanagerEntities.Locations
+                        .FirstOrDefault(l => l.Postleitzahl == address.Locations.Postleitzahl
+                                             && l.Ortschaft == address.Locations.Ortschaft);
+
+                    if (existingLocation != null)
+                    {
+                        // Use the existing location and set LocationID
+                        address.LocationID = existingLocation.LocationID;
+                    }
+                    else
+                    {
+                        // Add the new location to the context and save changes to generate LocationID
+                        AddressmanagerEntities.Locations.Add(address.Locations);
+                        AddressmanagerEntities.SaveChanges(); // Save immediately to get the new LocationID
+
+                        // Set the new LocationID in the address object
+                        address.LocationID = address.Locations.LocationID;
+                    }
+
+                    // Clear the Locations object to avoid redundancy
+                    address.Locations = null;
+                }
+
+                // Add the address to the context
+                AddressmanagerEntities.Addresses.Add(address);
+            }
+
+            // Save all addresses to the database
+            AddressmanagerEntities.SaveChanges();
+        }
+
     }
 
 }

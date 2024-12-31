@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Address_Manager.Window"
         mc:Ignorable="d"
-        Title="Map Columns" Height="447" Width="1081">
+        Title="Map Columns" Height="551" Width="1081">
     <DockPanel Margin="10">
         <!-- Top GroupBox -->
         <GroupBox Header="Define Mappings" Margin="10" DockPanel.Dock="Top">
