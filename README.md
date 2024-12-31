@@ -183,6 +183,6 @@ Contributions are welcome! Please follow these steps:
 
 ## Contact
 
-- **Author:** Your Name
+- **Author:** Rehan Ghani
     
-- **Email:** your.email@example.com
+- **Email:** rehanghani@sunrise.ch
