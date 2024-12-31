@@ -50,15 +50,15 @@
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <DataGrid x:Name="MappedColumnsGrid" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" Margin="10" Width="400" SelectionChanged="MappedColumnsGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="CSV Column" Binding="{Binding CsvColumn}" Width="*"/>
-                            <DataGridTextColumn Header="Database Column" Binding="{Binding DatabaseColumn}" Width="*"/>
+                            <DataGridTextColumn Header="Mapped CSV Column" Binding="{Binding CsvColumn}" Width="*"/>
+                            <DataGridTextColumn Header=" Mapped Database Column" Binding="{Binding DatabaseColumn}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <DataGrid x:Name="IgnoredColumnsGrid" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" Margin="10" Width="400" SelectionChanged="IgnoredColumnsGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="CSV Column" Binding="{Binding CsvColumn}" Width="*"/>
-                            <DataGridTextColumn Header="Database Column" Binding="{Binding DatabaseColumn}" Width="*"/>
+                            <DataGridTextColumn Header="Ignored CSV Column" Binding="{Binding CsvColumn}" Width="*"/>
+                            <DataGridTextColumn Header="Ignored Database Column" Binding="{Binding DatabaseColumn}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
